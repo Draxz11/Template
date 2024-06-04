@@ -1,5 +1,7 @@
-import { Engine } from "excalibur";
+import { Engine, FadeInOut } from "excalibur";
 import { welcomeScene } from "./scenes/welcomeScene";
+import { loader } from "./resources";
+import { historyScene } from "./scenes/historyScene";
 
 const game = new Engine({
   width: 1200,
@@ -7,8 +9,12 @@ const game = new Engine({
   canvasElementId: "jogo"
 })
 
-  game.addScene("Bem-vindo", new welcomeScene())
+  game.addScene("bemvindo", new welcomeScene())
+  game.addScene("historia", new historyScene())
 
-game.start().then(() => {
-  game.goToScene("Bemvindo")
+game.start(loader).then(() => {
+  game.goToScene("bemvindo", {
+    // Adiciona transição lenta ao ir para a welcomeScene
+    sourceOut: new FadeInOut({ duration: 1000 })
+  })
 })
