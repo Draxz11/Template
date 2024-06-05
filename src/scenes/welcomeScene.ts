@@ -1,4 +1,4 @@
-import { Actor, Color, Engine, FadeInOut, Font, Keys, Label, Scene, TextAlign, Transition, vec } from "excalibur";
+import { Actor, Color, Engine, FadeInOut, Font, ImageSource, Keys, Label, Loader, Scene, SpriteSheet, TextAlign, Transition, vec } from "excalibur";
 import { Resources } from "../resources";
 
 export class welcomeScene extends Scene {
@@ -91,3 +91,4 @@ export class welcomeScene extends Scene {
      }
     
 }    
+
