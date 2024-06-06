@@ -6,7 +6,8 @@ import imagem from "./images/logo-vertical.png"
 export const Resources = {
   Sword: new ImageSource(sword),
   Logo: new ImageSource(logo),
-  LogoVertical: new ImageSource(imagem)
+  LogoVertical: new ImageSource(imagem),
+  Gamificacapo: new ImageSource()
 } as const;
 
 export const loader = new Loader();
