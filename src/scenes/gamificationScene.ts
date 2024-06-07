@@ -4,6 +4,24 @@ import { Resources } from "../resources";
 export class gamificationScene extends Scene {
     elementoHTML?: HTMLElement
 
+     // Método para esmaecer um elemento HTML
+     fadeOutElement(elemento: HTMLElement) {
+        // Pegar opacidade do elemento HTML
+        let opacidade = parseFloat(elemento.style.opacity)
+
+        // Repetir diminuição da opacidade
+        setInterval(() => {
+            // Se elemento ainda está visivel
+            if (opacidade > 0) {
+                // Diminuir a opacidade
+                opacidade = opacidade - 0.1
+
+                // Atualizar a opacidade do elemento
+                elemento.style.opacity = opacidade.toString()
+            }
+        }, 3)
+    }
+
     onInitialize(engine: Engine<any>): void {
         this.backgroundColor = Color.Gray
     
@@ -33,6 +51,18 @@ export class gamificationScene extends Scene {
 
         this.add(actorLogoGamificaAi)
 
+        // Configurar a cena para detectar a teclao Enter e ir para a próxima cena
+        this.input.keyboard.on("press", (event) => {
+            if(event.key == Keys.Enter) {
+                this.fadeOutElement(this.elementoHTML!)
+                engine.goToScene("exposicao")
+            }
+        })
+
+    }
+
+    onDeactivate(context: SceneActivationContext<undefined>): void {
+        this.elementoHTML?.remove()
     }
 }
 

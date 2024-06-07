@@ -7,7 +7,7 @@ export const Resources = {
   Sword: new ImageSource(sword),
   Logo: new ImageSource(logo),
   LogoVertical: new ImageSource(imagem),
-  Gamificacapo: new ImageSource()
+  Gamificacapo: new ImageSource(imagem)
 } as const;
 
 export const loader = new Loader();
