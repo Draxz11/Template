@@ -1,4 +1,5 @@
-import { Actor, CollisionType, Color, Engine, Keys, vec } from "excalibur";
+import { Actor, Animation, CollisionType, Color, Engine, Keys, Resource, SpriteSheet, Vector, vec } from "excalibur";
+import { Resources } from "../resources";
 
 export class Player extends Actor {
     // Propiedade do player
@@ -6,9 +7,9 @@ export class Player extends Actor {
 
 
     // Configuração do Player
-    constructor() {
+    constructor(posicao: Vector) {
         super({
-            pos: vec(600, 500),
+            pos: posicao,
             width: 32,
             height: 32,
             name: "Jugador",
@@ -18,6 +19,47 @@ export class Player extends Actor {
     }
 
     onInitialize(engine: Engine<any>): void {
+        // Configurar sprite do player
+        const playerSpriteSheet = SpriteSheet.fromImageSource({
+            image: Resources.PlayerSpriteSheet,
+            grid: {
+                spriteWidth: 32,
+                spriteHeight: 64,
+                columns: 56,
+                rows: 20
+            },
+            spacing: {
+                originOffset: {
+                    y: 4
+                }
+            }
+        })
+
+        // Criar animações
+        const duracaoFrameAnimacao = 70
+        // Animações Idle
+        // Idle Esquerda
+        const leftIdle = new Animation({
+            frames: [
+                { graphic: playerSpriteSheet.getSprite(12, 1) },
+                { graphic: playerSpriteSheet.getSprite(13, 1) },
+                { graphic: playerSpriteSheet.getSprite(14, 1) },
+                { graphic: playerSpriteSheet.getSprite(15, 1) },
+                { graphic: playerSpriteSheet.getSprite(16, 1) },
+                { graphic: playerSpriteSheet.getSprite(17, 1) }
+            ],
+            frameDuration: duracaoFrameAnimacao
+        })
+        this.graphics.add("left-idle", leftIdle)
+
+        this.graphics.use("left-idle")
+
+        let imagePlayer = playerSpriteSheet.getSprite(3, 0)
+        imagePlayer.scale = vec(1.3, 1.3)
+
+        this.graphics.add(imagePlayer)
+
+
         // Configurar player para monitorar evento "hold" -> segurar tecla
         engine.input.keyboard.on("hold", (event) => {
             // Detectar qual tecla está pressionada

@@ -1,4 +1,4 @@
-import { ImageSource, Loader } from "excalibur";
+import { ImageFiltering, ImageSource, Loader } from "excalibur";
 import sword from "./images/sword.png";
 import logo from "./images/logo.png"
 import imagem from "./images/logo-vertical.png"
@@ -11,11 +11,13 @@ import tsxEstoquePath from "./Maps/tileset_estoque.tsx?url"
 import tsxBibliotecaPath from "./Maps/tileset_biblioteca.tsx?url"
 
 import tmxMapaPath from "./Maps/Showroom_map.tmx?url"
+import playerSpritePath from "./sprites/Player.png"
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
 export const Resources = {
   Sword: new ImageSource(sword),
   Logo: new ImageSource(logo),
+  PlayerSpriteSheet: new ImageSource(playerSpritePath, { filtering: ImageFiltering.Pixel}), 
   LogoVertical: new ImageSource(imagem),
   Gamificacapo: new ImageSource(imagem),
   Mapa: new TiledResource(tmxMapaPath, {
