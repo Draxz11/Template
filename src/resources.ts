@@ -1,25 +1,26 @@
 import { ImageFiltering, ImageSource, Loader } from "excalibur";
+import { TiledResource } from "@excaliburjs/plugin-tiled";
+
 import sword from "./images/sword.png";
 import logo from "./images/logo.png"
-import imagem from "./images/logo-vertical.png"
+import logoVertical from "./images/logo-vertical.png"
 
-import pngTilesetPath from "./Maps/Room_Builder_32x32.png?url"
+import pngTilesetPath from "./maps/Room_Builder_32x32.png?url"
 
-import tsxParedesPath from "./Maps/tileset_paredes.tsx?url"
-import tsxGenericPath from "./Maps/tileset_generic.tsx?url"
-import tsxEstoquePath from "./Maps/tileset_estoque.tsx?url"
-import tsxBibliotecaPath from "./Maps/tileset_biblioteca.tsx?url"
+import tsxParedesPath from "./maps/tileset_paredes.tsx?url"
+import tsxGenericPath from "./maps/tileset_generic.tsx?url"
+import tsxEstoquePath from "./maps/tileset_estoque.tsx?url"
+import tsxBibliotecaPath from "./maps/tileset_biblioteca.tsx?url"
 
-import tmxMapaPath from "./Maps/Showroom_map.tmx?url"
-import playerSpritePath from "./sprites/Player.png"
-import { TiledResource } from "@excaliburjs/plugin-tiled";
+import tmxMapaPath from "./maps/showroom_map.tmx?url"
+
+import playerSpritePath from "./sprites/thiago.png"
 
 export const Resources = {
   Sword: new ImageSource(sword),
   Logo: new ImageSource(logo),
-  PlayerSpriteSheet: new ImageSource(playerSpritePath, { filtering: ImageFiltering.Pixel}), 
-  LogoVertical: new ImageSource(imagem),
-  Gamificacapo: new ImageSource(imagem),
+  PlayerSpriteSheet: new ImageSource(playerSpritePath, { filtering: ImageFiltering.Pixel }),
+  LogoVertical: new ImageSource(logoVertical),
   Mapa: new TiledResource(tmxMapaPath, {
     pathMap: [
       { path: "showroom_map.tmx", output: tmxMapaPath },
@@ -36,4 +37,3 @@ export const loader = new Loader();
 for (const res of Object.values(Resources)) {
   loader.addResource(res);
 }
-

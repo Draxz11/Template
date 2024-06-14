@@ -5,8 +5,10 @@ body {
 }
 
 .container-game {
-  height: 800px;
   width: 1200px;
+  height: 800px;
+
+  margin: 20px auto;
 
   display: flex;
   justify-content: center;
@@ -38,7 +40,7 @@ body {
   font-family: "Anta";
 
   position: absolute;
-  top: 10%;
+  top: 10%;  
 }
 
 .sobre-gamifica h2, .gamificacao h2{
@@ -54,4 +56,3 @@ body {
 
   line-height: 2;
 }
-

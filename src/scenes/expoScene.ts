@@ -1,9 +1,9 @@
-import { Actor, CollisionType, Color, Engine, FadeInOut, Resource, Scene, Transition, vec } from "excalibur";
+import { Actor, CollisionType, Color, Engine, FadeInOut, Scene, Transition, vec } from "excalibur";
 import { Resources } from "../resources";
 import { Player } from "../actors/player";
 import { Npc } from "../actors/npc";
 
-export class expoScene extends Scene{
+export class expoScene extends Scene {
     onTransition(direction: "in" | "out"): Transition | undefined {
         return new FadeInOut({
             direction: direction,
@@ -13,59 +13,61 @@ export class expoScene extends Scene{
     }
 
     onInitialize(engine: Engine<any>): void {
+        // Ativar o modo de Debug
+        // engine.toggleDebug()
+        
         // Carregar o mapa
         let tiledMap = Resources.Mapa
 
-        // Definir offset para a renderização do mapa
+        // Definir offset para renderizaçãso do mapa 
         let offsetX = 138
         let offsetY = 100
 
         // Adicionar o mapa na cena
         tiledMap.addToScene(this, {
             pos: vec(offsetX, offsetY),
-
         })
 
-        // Definir o zoom da camera para aumentar um pouco a vizualização
+        // Definir zoom da camera para aumentar um pouco a visualização
         this.camera.zoom = 1.4
 
-        // Carregar spaw point player
-        let spawPoint = tiledMap.getObjectsByName("player_spaw")[0]
-
+        // Carregar spawn point do player
+        let spawnPoint = tiledMap.getObjectsByName("player_spawn")[0]
+        
         // Criação e configuração do Player
-        let jogador = new Player(vec(spawPoint.x + offsetX,spawPoint.y + offsetY))
+        let jogador = new Player(vec(spawnPoint.x + offsetX, spawnPoint.y + offsetY))
 
         // Define z-index do player, útil se algum outro elemento ficar "por cima" do jogador
-        jogador.z = 10
+        jogador.z = 1
 
-        // Adicionar o Player na cena
+        // Adicionar o player na cena
         this.add(jogador)
-        
-        // Pegar spaw Points dos NPC'S 
-        let npcSpawPointA = tiledMap.getObjectsByName("npc_a")[0]
-        let npcSpawPointB = tiledMap.getObjectsByName("npc_b")[0]
-        let npcSpawPointC = tiledMap.getObjectsByName("npc_c")[0]
+
+        // Pegar spawn Points dos NPCs
+        let npcSpawnPointA = tiledMap.getObjectsByName("npc_a")[0]
+        let npcSpawnPointB = tiledMap.getObjectsByName("npc_b")[0]
+        let npcSpawnPointC = tiledMap.getObjectsByName("npc_c")[0]
 
         // Configurar NPCs
         let npcA = new Npc(
-            vec(npcSpawPointA.x + offsetX, npcSpawPointA.y + offsetY),
-            Color.Chartreuse,
+            vec(npcSpawnPointA.x + offsetX, npcSpawnPointA.y + offsetY),
+            Color.Blue,
             "NpcA"
         )
 
         let npcB = new Npc(
-            vec(npcSpawPointB.x + offsetX, npcSpawPointB.y + offsetY),
-            Color.Blue,
+            vec(npcSpawnPointB.x + offsetX, npcSpawnPointB.y + offsetY),
+            Color.Chartreuse,
             "NpcB"
         )
 
         let npcC = new Npc(
-            vec(npcSpawPointC.x + offsetX, npcSpawPointC.y + offsetY),
+            vec(npcSpawnPointC.x + offsetX, npcSpawnPointC.y + offsetY),
             Color.Yellow,
             "NpcC"
         )
 
-        // Adicionar NPCs
+        // Adicionar os NPCs
         this.add(npcA)
         this.add(npcB)
         this.add(npcC)
@@ -74,29 +76,29 @@ export class expoScene extends Scene{
         this.camera.strategy.lockToActor(jogador)
         // this.camera.zoom = 2
 
-        // Adicionar clisão com cada objeto
+        // Adicionar colisão com cada objeto
         // Pegar a camada de objetos colisores
-        let camadaObjetoColisores = tiledMap.getObjectLayers("ObjetosColisores")[0]
+        let camadaObjetosColisores = tiledMap.getObjectLayers("ObjetosColisores")[0]
 
-        console.log(camadaObjetoColisores);
-
-        // Percorrer abjetos com foreach e para cada objeto,renderizar um actor
-        camadaObjetoColisores.objects.forEach(objeto => {
-            // Configurar actor
+        console.log(camadaObjetosColisores);
+        
+        // Percorrer objetos com foreach e para cada objeto, renderizar um actor
+        camadaObjetosColisores.objects.forEach(objeto => {
+            // Configurar o actor
             const objetoAtual = new Actor({
                 name: objeto.name,
                 x: objeto.x + offsetX + (objeto.tiledObject.width! / 2),
                 y: objeto.y + offsetY + (objeto.tiledObject.height! / 2),
-                width:objeto.tiledObject.height,
+                width: objeto.tiledObject.width,
+                height: objeto.tiledObject.height,
                 collisionType: CollisionType.Fixed,
-                color: Color.Blue,
-                z: 99
+                // color: Color.Blue,
+                // z: 99
             })
 
             // Adicionar o colisor do objeto na cena
             this.add(objetoAtual)
         })
-
     }
     
 }

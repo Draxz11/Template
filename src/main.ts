@@ -1,4 +1,4 @@
-import { Engine, FadeInOut, ImageSource, Loader, SpriteSheet } from "excalibur";
+import { Engine, FadeInOut } from "excalibur";
 import { welcomeScene } from "./scenes/welcomeScene";
 import { loader } from "./resources";
 import { historyScene } from "./scenes/historyScene";
@@ -13,10 +13,10 @@ const game = new Engine({
   pixelArt: true
 })
 
-  game.addScene("bemvindo", new welcomeScene())
-  game.addScene("historia", new historyScene())
-  game.addScene("gamificacao", new gamificationScene)
-  game.addScene("exposicao", new expoScene)
+game.addScene("bemvindo", new welcomeScene())
+game.addScene("historia", new historyScene())
+game.addScene("gamificacao", new gamificationScene())
+game.addScene("exposicao", new expoScene())
 
 game.start(loader).then(() => {
   game.goToScene("exposicao", {
@@ -24,4 +24,3 @@ game.start(loader).then(() => {
     sourceOut: new FadeInOut({ duration: 1000 })
   })
 })
-
