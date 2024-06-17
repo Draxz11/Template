@@ -1,6 +1,4 @@
-// vite.config.js
 import { defineConfig } from 'vite';
-
 const tiledPlugin = () => {
     return {
         name: 'tiled-tileset-plugin',
@@ -13,7 +11,6 @@ const tiledPlugin = () => {
         }
     };
 }
-
 export default defineConfig({
     plugins: [tiledPlugin()], // hint vite that tiled tilesets should be treated as external
     build: {
