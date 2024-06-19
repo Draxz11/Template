@@ -16,12 +16,20 @@ import tmxMapaPath from "./maps/showroom_map.tmx?url"
 
 import playerSpritePath from "./sprites/thiago.png"
 
+import PersonagemPixeladoa from "./images/Personagem pixelado mesa_stand_a.png"
+import PersonagemPixeladob from "./images/Personagem pixelado mesa_stand_b.png"
+import PersonagemPixeladoc from "./images/Personagem pixelado mesa_stand_c.png"
+
 export const Resources = {
   Sword: new ImageSource(sword),
   Logo: new ImageSource(logo),
   PlayerSpriteSheet: new ImageSource(playerSpritePath, { filtering: ImageFiltering.Pixel }),
   LogoVertical: new ImageSource(logoVertical),
-  Mapa: new TiledResource(tmxMapaPath, {
+  Mapa: new TiledResource(tmxMapaPath,
+  Personagempixeladoa: new ImageSource(Ppa),
+  Personagempixeladob: new ImageSource(Ppb),
+  Personagempixeladoc: new ImageSource(Ppc),
+    {
     pathMap: [
       { path: "showroom_map.tmx", output: tmxMapaPath },
       { path: "Room_Builder_32x32.png", output: pngTilesetPath },
