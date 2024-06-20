@@ -47,34 +47,16 @@ export class caseScene extends Scene {
 
     onActivate(context: SceneActivationContext<unknown>): void {
         
-        // Faz a caixa texto apareer na cena
+        // Faz a caixa texto aparecer ao chegar na cena
         this.elementoTexto!.style.opacity = "1"
 
         // Receber os dados passados pela cena anterior
         this.objetoInteracao = context.data
 
-        // Pegar dados vindos da cena passada
-        this.objetoInteracao = context.data
-
-        console.log(this.objetoInteracao);
-
-        // Se for a mesa a
-        if (this.objetoInteracao.nomeDoActor == "mesa_stand_a") {
-            this.textoDaCena = "Essa é a descrição do case A"
-            // Mesa A detectada
-            this.elementoTexto!.innerHTML = `<h2>Verde Tech Soluções Ambientais<h2/>
-            <p>A VerdeTech Soluções Ambientais é uma empresa inovadora dedicada à sustentabilidade e à preservação do meio ambiente. Especializada em tecnologias verdes, a empresa oferece consultoria e implementação de projetos de energia renovável, gestão de resíduos e conservação de recursos naturais. Com uma equipe de especialistas em engenharia ambiental, biologia e tecnologias sustentáveis, a VerdeTech trabalha para ajudar empresas e comunidades a reduzir sua pegada ecológica e promover práticas ecologicamente responsáveis.<p/>`
-            
-            // inserir o sprite no actor da mesa A
-            this.empresa?.graphics.add(this.listaImagens![1])
-
-            // Mudar o zoom da imagem 
-            this.actorempresa!.graphic.current!.scale = vec(0.2 , 0.2)
-
-            this.add(this.actorempresa)
-
-        }
-
+       if (this.objetoInteracao.nomeDaMesa == "mesa_stand_a") {
+        // Mesa A detectada
+        this.
+       }
         // Se for B
         if (this.objetoInteracao.nomeDoActor == "mesa_stand_b") {
             this.textoDaCena = "Essa é a descrição do case B"
