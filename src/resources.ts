@@ -15,6 +15,9 @@ import tsxBibliotecaPath from "./maps/tileset_biblioteca.tsx?url"
 import tmxMapaPath from "./maps/showroom_map.tmx?url"
 
 import playerSpritePath from "./sprites/thiago.png"
+import npcASpriteSheet from "./sprites/Personagem pixelado mesa_stand_a.png"
+import npcBSpriteSheet from "./sprites/Personagem pixelado mesa_stand_b.png"
+import npcCSpriteSheet from "./sprites/Personagem pixelado mesa_stand_c.png"
 
 import PersonagemPixeladoa from "./images/Personagem pixelado mesa_stand_a.png"
 import PersonagemPixeladob from "./images/Personagem pixelado mesa_stand_b.png"
@@ -29,6 +32,9 @@ export const Resources = {
   Personagempixeladoa: new ImageSource(Ppa),
   Personagempixeladob: new ImageSource(Ppb),
   Personagempixeladoc: new ImageSource(Ppc),
+  npcASpriteSheet: new ImageSource (npcASpriteSheet, { filtering: ImageFiltering.Pixel}),
+  npcBSpriteSheet: new ImageSource (npcBSpriteSheet, { filtering: ImageFiltering.Pixel}),
+  npcCSpriteSheet: new ImageSource (npcCSpriteSheet, { filtering: ImageFiltering.Pixel})
     {
     pathMap: [
       { path: "showroom_map.tmx", output: tmxMapaPath },
@@ -36,7 +42,7 @@ export const Resources = {
       { path: "tileset_paredes.tsx", output: tsxParedesPath },
       { path: "tileset_generic.tsx", output: tsxGenericPath },
       { path: "tileset_estoque.tsx", output: tsxEstoquePath },
-      { path: "tileset_biblioteca.tsx", output: tsxBibliotecaPath }
+      { path: "tileset_biblioteca.tsx", output: tsxBibliotecaPath },
     ]
   })
 } as const;
