@@ -1,4 +1,4 @@
-import { ImageFiltering, ImageSource, Loader } from "excalibur";
+import { ImageFiltering, ImageSource, Loader, Sound } from "excalibur";
 import { TiledResource } from "@excaliburjs/plugin-tiled";
 
 import sword from "./images/sword.png";
@@ -19,30 +19,36 @@ import npcASpriteSheet from "./sprites/Personagem pixelado mesa_stand_a.png"
 import npcBSpriteSheet from "./sprites/Personagem pixelado mesa_stand_b.png"
 import npcCSpriteSheet from "./sprites/Personagem pixelado mesa_stand_c.png"
 
-import PersonagemPixeladoa from "./images/Personagem pixelado mesa_stand_a.png"
-import PersonagemPixeladob from "./images/Personagem pixelado mesa_stand_b.png"
-import PersonagemPixeladoc from "./images/Personagem pixelado mesa_stand_c.png"
+import ritmada from "./sounds/ritmada_zelda.mp3";
+import classico from "./sounds/zelda.mp3"
+
+import logoFast from "./images/VerdeTech.jpg"
+import logoXYZ from "./images/Nova Era Software.jpg"
+import logoABC from "./images/Gourmet Express.jpg"
 
 export const Resources = {
   Sword: new ImageSource(sword),
   Logo: new ImageSource(logo),
   PlayerSpriteSheet: new ImageSource(playerSpritePath, { filtering: ImageFiltering.Pixel }),
   LogoVertical: new ImageSource(logoVertical),
-  Mapa: new TiledResource(tmxMapaPath,
-  Personagempixeladoa: new ImageSource(Ppa),
-  Personagempixeladob: new ImageSource(Ppb),
-  Personagempixeladoc: new ImageSource(Ppc),
-  npcASpriteSheet: new ImageSource (npcASpriteSheet, { filtering: ImageFiltering.Pixel}),
-  npcBSpriteSheet: new ImageSource (npcBSpriteSheet, { filtering: ImageFiltering.Pixel}),
-  npcCSpriteSheet: new ImageSource (npcCSpriteSheet, { filtering: ImageFiltering.Pixel})
-    {
+  RitmadaBGM: new Sound(ritmada),
+  ClassicBGM: new Sound(classico),
+  LogoFastMart: new ImageSource(logoFast),
+  LogoXYZ: new ImageSource(logoXYZ),
+  LogoABC: new ImageSource(logoABC),
+   
+  NpcASpriteSheet: new ImageSource(npcASpriteSheet, { filtering: ImageFiltering.Pixel }),
+  NpcBSpriteSheet: new ImageSource(npcBSpriteSheet, { filtering: ImageFiltering.Pixel }),
+  NpcCSpriteSheet: new ImageSource(npcCSpriteSheet, { filtering: ImageFiltering.Pixel }),
+
+  Mapa: new TiledResource(tmxMapaPath, {
     pathMap: [
       { path: "showroom_map.tmx", output: tmxMapaPath },
       { path: "Room_Builder_32x32.png", output: pngTilesetPath },
       { path: "tileset_paredes.tsx", output: tsxParedesPath },
       { path: "tileset_generic.tsx", output: tsxGenericPath },
       { path: "tileset_estoque.tsx", output: tsxEstoquePath },
-      { path: "tileset_biblioteca.tsx", output: tsxBibliotecaPath },
+      { path: "tileset_biblioteca.tsx", output: tsxBibliotecaPath }
     ]
   })
 } as const;

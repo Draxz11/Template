@@ -1,18 +1,18 @@
-import { Actor, Color, Engine, FadeInOut, Keys, Resource, Scene, SceneActivationContext, Transition, vec } from "excalibur";
+import { Actor, Color, Engine, FadeInOut, Keys, Scene, SceneActivationContext, Sprite, Transition, vec } from "excalibur";
 import { Resources } from "../resources";
 
 export class caseScene extends Scene {
     private objetoInteracao: any
     private elementoTexto?: HTMLElement
-    private empresa?: Actor
+    private actorEmpresa?: Actor
 
-    private textoDaCena: string = ""
+    private listaImagens?: Sprite[]
     
     onTransition(direction: "in" | "out"): Transition | undefined {
         return new FadeInOut({
             direction: direction,
             color: Color.Black,
-            duration: 500
+            duration: 1000
         })
     }
 
@@ -23,72 +23,86 @@ export class caseScene extends Scene {
         this.elementoTexto = document.createElement("div") as HTMLElement
         this.elementoTexto.classList.add("texto-case")
 
-        // Adicionar o elemento ao conteiner game
-        let containerGame =document.querySelector(".container-game")
+        // Adicionar o elemento ao container game
+        let containerGame = document.querySelector(".container-game")
         containerGame?.appendChild(this.elementoTexto)
 
-        // Ao pressionar a tecla Esc voltar para a exposição
-        this.input.keyboard.on("press",(event) => {
+        // Ao pressionar Esc voltar para a exposição
+        this.input.keyboard.on("press", (event) => {
             if (event.key == Keys.Esc) {
                 engine.goToScene("exposicao")
             }
         })
 
-        // Criar actor para receber as imagens
-        this.empresa = new Actor({
-            pos: vec(engine.drawWidth -300, engine.halfDrawHeight -50)
+        // Criar actor para receber a imagem
+        this.actorEmpresa = new Actor({
+            pos: vec(engine.drawWidth - 300, engine.halfDrawHeight - 50)
         })
 
         // Carregar imagens das empresas
-        let PersonagemPixeladoa = Resources.PersonagemPixeladoa.toSprite()
-        let PersonagemPixeladob = Resources.PersonagemPixeladob.toSprite()
-        let PersonagemPixeladoc = Resources.PersonagemPixeladoc.toSprite()
+        let imagemEmpresaXYZ = Resources.PersonagemPixeladoa.toSprite()
+        let imagemEmpresaABC = Resources.PersonagemPixeladob.toSprite()
+        let imagemEmpresaFastMart = Resources.PersonagemPixeladoc.toSprite()
+
+        this.listaImagens = [imagemEmpresaXYZ, imagemEmpresaABC, imagemEmpresaFastMart]        
     }
 
     onActivate(context: SceneActivationContext<unknown>): void {
-        
-        // Faz a caixa texto aparecer ao chegar na cena
+        // Faz a caixa de texto aparecer ao chegar na cena
         this.elementoTexto!.style.opacity = "1"
-
+        
         // Receber os dados passados pela cena anterior
         this.objetoInteracao = context.data
 
-       if (this.objetoInteracao.nomeDaMesa == "mesa_stand_a") {
-        // Mesa A detectada
-        this.
-       }
-        // Se for B
-        if (this.objetoInteracao.nomeDoActor == "mesa_stand_b") {
-            this.textoDaCena = "Essa é a descrição do case B"
-            this.elementoTexto!.innerHTML = `<h2>NovaEra Software
-            <h2/><p>A NovaEra Software é uma empresa de desenvolvimento de software que se concentra na criação de soluções tecnológicas de ponta para empresas de todos os portes. Com um portfólio abrangente de serviços que inclui desenvolvimento de aplicativos móveis, sistemas de gestão empresarial e plataformas de e-commerce, a NovaEra se destaca por sua abordagem inovadora e personalizada. A missão da empresa é transformar ideias em soluções digitais eficientes e robustas, ajudando seus clientes a alcançar maior produtividade e competitividade no mercado.<p/>`
-        
-            // inserir o sprite no actor da mesa A
-            this.empresa?.graphics.add(this.listaImagens![2])
+        if (this.objetoInteracao.nomeDaMesa == "mesa_stand_a") {
+            // Mesa A detectada
+            this.elementoTexto!.innerHTML = `<h2>XYZ Tech - Transformação Digital e Capacitação na Tecnologia</h2>
+            <p>A empresa enfrentava dificuldades na adoção de novas tecnologias pelos funcionários, resultando em baixa eficiência e resistência às mudanças.</p>
+            <p>A XYZ Tech Solutions implementou uma plataforma de treinamento gamificada, onde os funcionários ganhavam pontos e badges ao completar módulos de treinamento sobre novas tecnologias. Eles podiam ver seu progresso em um leaderboard, incentivando uma competição saudável.</p>            
+            `
 
-            // Mudar o zoom da imagem 
-            this.actorempresa!.graphic.current!.scale = vec(0.2 , 0.2)
+            // Inserir o sprite no actor da mesa A
+            this.actorEmpresa?.graphics.add(this.listaImagens![0])
 
+            // Mudar o zoom da imagem
+            this.actorEmpresa!.graphics.current!.scale = vec(0.2, 0.2)
         }
-        
-        // Se for C
-        if (this.objetoInteracao.nomeDoActor == "mesa_stand_c") {
-            this.textoDaCena = "Essa é a descrição do case C"
-            this.elementoTexto!.innerHTML = `<h2>GourmetExpress<h2/><p>A GourmetExpress é uma empresa de entrega de refeições gourmet que combina conveniência e alta gastronomia. Focada em proporcionar uma experiência culinária excepcional, a GourmetExpress trabalha com chefs renomados para criar um menu diversificado e de alta qualidade, oferecendo pratos preparados com ingredientes frescos e selecionados. A empresa se diferencia pela entrega rápida e eficiente, garantindo que os clientes recebam suas refeições no ponto perfeito para consumo. Ideal para quem busca praticidade sem abrir mão do sabor e da sofisticação.<p/>`
-       
-            // inserir o sprite no actor da mesa A
-            this.empresa?.graphics.add(this.listaImagens![3])
 
-            // Mudar o zoom da imagem 
-            this.actorempresa!.graphic.current!.scale = vec(0.2 , 0.2)
+        if (this.objetoInteracao.nomeDaMesa == "mesa_stand_b") {
+            // Mesa B detectada
+            this.elementoTexto!.innerHTML = `<h2>ABC Finance - Incentivo à Cultura de Inovação</h2>
+            <p>A empresa queria incentivar os funcionários a proporem ideias inovadoras para melhorar processos e produtos, mas havia pouca participação.
+            <p>ABC Finance criou um programa chamado "InovaABC" onde os funcionários podiam submeter ideias e ganhar pontos. As ideias eram votadas pelos colegas e avaliadas por um comitê. Os funcionários com as melhores ideias ganhavam prêmios e reconhecimento trimestral.
+            `
 
+            // Inserir o sprite no actor da mesa A
+            this.actorEmpresa?.graphics.add(this.listaImagens![1])
+
+            // Mudar o zoom da imagem
+            this.actorEmpresa!.graphics.current!.scale = vec(0.2, 0.2)
         }
+
+        if (this.objetoInteracao.nomeDaMesa == "mesa_stand_c") {
+            // Mesa C detectada
+            this.elementoTexto!.innerHTML = `<h2>FastMart - Melhoria na Experiência do Cliente</h2>
+            <p>A empresa de varejo enfrentava problemas com o atendimento ao cliente, resultando em baixa satisfação e retenção de clientes.
+            <p>FastMart lançou uma aplicação interna onde os atendentes ganhavam pontos ao fornecer um excelente atendimento ao cliente, baseado em avaliações dos próprios clientes e supervisores. Os melhores atendentes eram destacados no mural da empresa e recebiam recompensas.
+            `
+
+            // Inserir o sprite no actor da mesa A
+            this.actorEmpresa?.graphics.add(this.listaImagens![2])
+
+            // Mudar o zoom da imagem
+            this.actorEmpresa!.graphics.current!.scale = vec(0.2, 0.2)
+        }
+
+        // Adiciona o actor da imagem na tela
+        this.add(this.actorEmpresa!)
+        
     }
 
     onDeactivate(context: SceneActivationContext<undefined>): void {
         // Faz a caixa de texto desaparecer ao mudar de cena
         this.elementoTexto!.style.opacity = "0"
     }
-
-
 }
